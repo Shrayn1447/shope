@@ -1,4 +1,15 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  images: {
+    domains: [
+      "cdn1.ozone.ru",
+      "formaall.ru",
+      "perm.diamondelectric.ru",
+      "lionsneakers.ru",
+      "ae01.alicdn.com",
+      "webstockreview.net",
+    ],
+  },
+};
 
 module.exports = nextConfig;

@@ -1,3 +1,7 @@
 export default function Home() {
-  return <div className="p-4 pt-2"></div>;
+  return (
+  <div className="h-screen p-[20px]">
+      
+  </div>
+  )
 }

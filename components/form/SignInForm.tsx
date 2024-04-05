@@ -45,7 +45,7 @@ export default function SignInForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex w-[500px] flex-col gap-[15px] rounded border bg-white p-6"
+        className="flex w-[500px] flex-col gap-[15px] rounded border bg-card p-6"
       >
         <FormLabel className="text-center">Вход</FormLabel>
         <FormField
