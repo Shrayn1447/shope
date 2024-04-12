@@ -11,26 +11,24 @@ export async function GET(request: NextRequest) {
           {
             name: {
               contains: query,
-              mode: 'insensitive',
-            }
+              mode: "insensitive",
+            },
           },
-          {
-            brand: {
-              contains: query,
-              mode: 'insensitive',
-            }
-          }
-        ]
-      }
+        ],
+      };
     }
     const products = await prisma.product.findMany({
-      where:whereCondition,
-      select:{
-        id:true,
-        name:true,
-        gender:true,
-        brand:true
-      }
+      take: 3,
+      where: {
+        name:{
+          contains:query,
+          mode:"insensitive"
+        }
+      },
+      select: {
+        id: true,
+        name: true
+      },
     });
     if (!products) {
       return NextResponse.json(

@@ -1,70 +1,84 @@
-interface Color {
+export interface Color {
   id: number;
   color: string;
 }
 
-interface Size {
+export interface Size {
   id: number;
   size: string;
+}
+export interface Img {
+  id: number;
+  url: string;
+}
+interface ProductItem {
+  product_img:string,
+  price: number;
+}
+
+
+
+
+
+interface VariationOption {
+  value: string;
+}
+
+interface VariationProduct {
+  id: number;
+  name: string;
+  product_categoryId: number;
+  variation_option: VariationOption[];
+}
+
+export interface Variation {
+  id: number;
+  category_name: string;
+  variation: VariationProduct[];
+}
+
+interface VariationOption {
+  id: number;
+  value: string;
+  variationId: number;
+}
+
+interface ProductConfiguration {
+  product_id: number;
+  variation_id: number;
+  variation_option: VariationOption;
+}
+
+interface ProductItem {
+  id: number;
+  quantity: number;
+  product_img: string;
+  price: number;
+  productId: number;
+  product_configuration: ProductConfiguration[];
 }
 
 export interface Product {
   id: number;
+  product_categoryId: number;
   name: string;
-  category: string;
-  brand: string | null;
-  gender: string | null;
-  price: number;
-  quantity: number | null;
-  material: string | null;
-  description: string | null;
-  image_url: string | null;
-  created_at: string;
-  updated_at: string;
-  color: Color[];
-  size: Size[];
+  descreption: string;
+  product_image: string;
+  product_item: ProductItem[];
 }
-export interface IProduct {
+
+interface ProductItem {
+  price: number;
+}
+
+export interface ProductCategory {
   id: number;
+  product_categoryId: number;
   name: string;
-  category: ProductCategory;
-  brand: string;
-  color: ProductColor[];
-  size: ProductSize[];
-  gender: ProductGender;
-  price: number;
-  quantity: number;
-  material: ProductMaterial;
-  description: string;
-  image_url: string;
-  created_at: string;
-  updated_at: string;
-}
-enum ProductCategory {
-  SHIRT,
-  SNEAKERS,
-  TROUSERS,
-  HOODIES,
-  HEADDRESS,
-}
-enum ProductColor {
-  WHITE,
-  BLACK,
-}
-enum ProductSize {
-  S,
-  M,
-  L,
-  X,
-  XL,
-}
-enum ProductGender {
-  MAN,
-  GIRL,
-}
-enum ProductMaterial {
-  COTTON,
-  LINEN,
-  WOOL,
-  SILK,
+  descreption: string;
+  product_image: string;
+  product_item: ProductItem[];
+  Product_category: {
+    category_name: string;
+  };
 }

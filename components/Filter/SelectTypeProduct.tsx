@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/select";
 import { filter_data } from "@/lib/filter_data";
 import { useRouter } from "next/navigation";
-export default function SelectTypeСlothes() {
+export default function SelectTypeProduct() {
   const router = useRouter();
   const handleChange = (category: string) => {
     router.push(`/search/${category}`);

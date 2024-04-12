@@ -3,28 +3,27 @@ import prisma from "@/lib/prisma";
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
-    const type = searchParams.get("type");
-    let whereCondition = {};
-    if (type !== null) {
-      whereCondition = {
-        category: type,
-      };
-    }
+    const type  = searchParams.get("type")
     const products = await prisma.product.findMany({
-      where: whereCondition,
+      where: {
+        Product_category: {
+          category_name: type,
+        }
+      },
       include: {
-        color: {
+        product_item: {
           select: {
-            color: true,
-          },
-        },
-        size: {
-          select: {
-            size: true,
-          },
-        },
-      } as never,
-    });
+            price:true
+          }
+        }, 
+        Product_category:{
+          select:{
+            category_name:true
+          }
+        }
+      }
+    })
+    
     if (!products) {
       return NextResponse.json(
         { message: "Данные не найдены" },

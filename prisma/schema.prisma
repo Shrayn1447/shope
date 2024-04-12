@@ -1,5 +1,5 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
   previewFeatures = ["fullTextSearch"]
 }
 
@@ -19,20 +19,55 @@ model User {
 }
 
 model Product {
-  id          Int             @id @default(autoincrement())
-  name        String
-  description String?
-  price       Float
-  brand       String
-  created_at  DateTime        @default(now())
-  image_url   String?
-  quantity    Int
-  updated_at  DateTime        @updatedAt
-  category    ProductCategory
-  gender      ProductGender
-  material    ProductMaterial
-  color       Color[]         @relation("ColorToProduct")
-  size        Size[]          @relation("ProductToSize")
+  id                 Int               @id @default(autoincrement())
+  Product_category   Product_category? @relation(fields: [product_categoryId], references: [id])
+  product_categoryId Int?
+  name               String
+  descreption        String
+  product_image      String
+  product_item       product_item[]
+}
+
+model Product_category {
+  id            Int         @id @default(autoincrement())
+  category_name category
+  variation     Variation[]
+  product       Product[]
+}
+
+model Variation {
+  id                 Int                @id @default(autoincrement())
+  name               String
+  Product_category   Product_category?  @relation(fields: [product_categoryId], references: [id])
+  product_categoryId Int?
+  variation_option   Variation_option[]
+}
+
+model Variation_option {
+  id                    Int                     @id @default(autoincrement())
+  value                 String
+  Variation             Variation?              @relation(fields: [variationId], references: [id])
+  variationId           Int?
+  Product_configuration Product_configuration[]
+}
+
+model Product_configuration {
+  product_id       Int
+  product_item     product_item     @relation(fields: [product_id], references: [id])
+  variation_id     Int
+  variation_option Variation_option @relation(fields: [variation_id], references: [id])
+
+  @@id([product_id, variation_id])
+}
+
+model product_item {
+  id                    Int                     @id @default(autoincrement())
+  quantity              Int                     @default(0)
+  product_configuration Product_configuration[]
+  product_img           String
+  price                 Float
+  Product               Product?                @relation(fields: [productId], references: [id])
+  productId             Int?
 }
 
 model Order {
@@ -47,51 +82,10 @@ model Order {
   user             User     @relation(fields: [userId], references: [id])
 }
 
-model Color {
-  id      Int       @id @default(autoincrement())
-  color   ColorEnum
-  product Product[] @relation("ColorToProduct")
-}
-
-model Size {
-  id      Int         @id @default(autoincrement())
-  size    ProductSize
-  product Product[]   @relation("ProductToSize")
-}
-
-enum ProductCategory {
+enum category {
   SHIRT
   SNEAKERS
   TROUSERS
   HOODIES
   HEADDRESS
-}
-
-enum ColorEnum {
-  black
-  blue
-  white
-  green
-  gray
-  beige
-}
-
-enum ProductSize {
-  S
-  M
-  L
-  X
-  XL
-}
-
-enum ProductGender {
-  MAN
-  GIRL
-}
-
-enum ProductMaterial {
-  COTTON
-  LINEN
-  WOOL
-  SILK
 }

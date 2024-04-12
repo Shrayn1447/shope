@@ -11,7 +11,7 @@ export default function loading() {
         fill="none"
         className="animate-spin"
       >
-        <g fill="#000000" fill-rule="evenodd" clip-rule="evenodd">
+        <g fill="#000000" clip-rule="evenodd">
           <path
             d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8z"
             opacity=".2"
