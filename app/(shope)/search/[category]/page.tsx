@@ -9,16 +9,15 @@ export default async function page({
   params: { category: string };
 }) {
   const response = await axios.get(
-    `http://localhost:3000/api/product?type=${params.category.toUpperCase()}`
+    `http://localhost:3000/api/product?type=${params.category.toUpperCase()}`,
   );
   const { data }: { data: ProductCategory[] } = response.data;
 
   return (
-    <div className="grid grid-cols-2 gap-x-3 gap-y-5 md:grid-cols-[repeat(auto-fit,minmax(200px,1fr))]">
+    <div className="grid grid-cols-2 gap-x-[12px] md:gap-0 place-items-center place-self-center place-content-center md:grid-cols-[repeat(auto-fit,minmax(200px,1fr))]">
       {data?.map((item, index) => {
         return <ProductCart key={index} data={item} />;
       })}
     </div>
-
   );
 }

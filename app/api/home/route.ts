@@ -2,28 +2,7 @@ import { NextResponse, NextRequest } from "next/server";
 import prisma from "@/lib/prisma";
 export async function GET(request: NextRequest) {
   try {
-    const { searchParams } = new URL(request.url);
-    const type = searchParams.get("type");
-    const products = await prisma.product.findMany({
-      where: {
-        Product_category: {
-          category_name: type,
-        },
-      },
-      include: {
-        product_item: {
-          select: {
-            price: true,
-          },
-        },
-        Product_category: {
-          select: {
-            category_name: true,
-          },
-        },
-      },
-    });
-
+    const products = await prisma.product.findMany();
     if (!products) {
       return NextResponse.json(
         { message: "Данные не найдены" },

@@ -13,7 +13,7 @@ const nextConfig = {
       "basket-02.wbbasket.ru",
       "basket-01.wbbasket.ru",
       "basket-14.wbbasket.ru",
-      ""
+      "",
     ],
   },
 };

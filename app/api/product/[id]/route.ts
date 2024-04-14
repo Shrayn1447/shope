@@ -29,13 +29,13 @@ export async function GET(
       },
       include: {
         variation: {
-            include: {
-              variation_option: {
-                select: {
-                  value:true
-                }
-              }
-            }  
+          include: {
+            variation_option: {
+              select: {
+                value: true,
+              },
+            },
+          },
         },
       },
     });
@@ -46,7 +46,10 @@ export async function GET(
         { status: 300 },
       );
     }
-    return NextResponse.json({ data: respons, variation:variation[0] }, { status: 200 });
+    return NextResponse.json(
+      { data: respons, variation: variation[0] },
+      { status: 200 },
+    );
   } catch (e) {
     return NextResponse.json(
       { message: "Что то пошлои не так" },

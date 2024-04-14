@@ -1,35 +1,38 @@
 import { NextResponse, NextRequest } from "next/server";
 import prisma from "@/lib/prisma";
+import { Value } from "@radix-ui/react-select";
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
-    const query = searchParams.get("query");
-    let whereCondition = {};
-    if (query !== null) {
-      whereCondition = {
+    const id = searchParams.get("pd");
+    const color = searchParams.get("color");
+    const size = searchParams.get("size");
+    const filter = await prisma.variation_option.findMany({
+      where: {
         OR: [
           {
-            name: {
-              contains: query,
-              mode: "insensitive",
-            },
+            value: color,
           },
+          {
+            value: size,
+          },
+          {
+            AND: {
+              
+            }
+          }
         ],
-      };
-    }
-    const products = await prisma.product.findMany({
-      take: 3,
-      where: {
-        name: {
-          contains: query,
-          mode: "insensitive",
+   
+      },
+      include: {
+        Product_configuration: {
+          include: {
+            product_item: {},
+          },
         },
       },
-      select: {
-        id: true,
-        name: true,
-      },
     });
+
     if (!products) {
       return NextResponse.json(
         { message: "Данные не найдены" },

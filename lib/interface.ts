@@ -12,13 +12,9 @@ export interface Img {
   url: string;
 }
 interface ProductItem {
-  product_img:string,
+  product_img: string;
   price: number;
 }
-
-
-
-
 
 interface VariationOption {
   value: string;
