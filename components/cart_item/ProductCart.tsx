@@ -5,12 +5,12 @@ import { Button } from "../ui/button";
 import Image from "next/image";
 export default function ProductCart({ data }: { data: ProductCategory }) {
   const router = useRouter();
+  console.log(data)
   return (
     <div
       onClick={() =>
         router.push(
-          `/product/${data.id}?c=${data.Product_category.category_name}`,
-        )
+          `/product/${data.id}?c=${data.product_category.category_name}`)
       }
       className="group flex max-w-fit animate-cart-animation cursor-pointer flex-col justify-end gap-3 overflow-hidden rounded-lg border text-center text-[14px] transition-colors  hover:border hover:border-blue-500 md:text-start md:text-[18px]"
     >

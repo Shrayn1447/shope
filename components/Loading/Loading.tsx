@@ -9,7 +9,7 @@ export default function Loading({ size = "50" }: { size: string }) {
         fill="none"
         className="animate-spin"
       >
-        <g fill="#000000" fill-rule="evenodd">
+        <g fill="#000000">
           <path
             d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8z"
             opacity=".2"

@@ -1,12 +1,13 @@
 import { NextResponse, NextRequest } from "next/server";
 import prisma from "@/lib/prisma";
+import type { category } from "@prisma/client";
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
-    const type = searchParams.get("type");
+    const type = searchParams.get("type") as category;
     const products = await prisma.product.findMany({
       where: {
-        Product_category: {
+        product_category: {
           category_name: type,
         },
       },
@@ -16,7 +17,7 @@ export async function GET(request: NextRequest) {
             price: true,
           },
         },
-        Product_category: {
+        product_category: {
           select: {
             category_name: true,
           },

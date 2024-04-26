@@ -1,10 +1,12 @@
 "use client";
 import { Button } from "../ui/button";
 import { Variation, Product } from "@/lib/interface";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useBacketStore } from "@/store/backet";
+import { useStateBacket } from "@/store/backetChange";
 import clsx from "clsx";
-import axios from "axios";
+import { useRouter } from "next/navigation";
+import { usePathname } from 'next/navigation'
 interface Form {
   [key: string]: string;
 }
@@ -15,7 +17,12 @@ export default function FormProduct({
   data: Product;
   variation: Variation;
 }) {
-  const updateBacket = useBacketStore((state) => state.updateBacket);
+  const { backet, addCount, calculatePrice, updateBacket } = useBacketStore(
+    (state) => state,
+  );
+  const opneChange = useStateBacket((state) => state.opneChange);
+  const pathname = usePathname()
+  const router = useRouter()
   const [form, setForm] = useState<Form>(() =>
     variation.variation.reduce((acc, item) => {
       return {
@@ -24,13 +31,7 @@ export default function FormProduct({
       };
     }, {}),
   );
-  // const [filter, setFilter] = useState()
-  // useEffect(() => {
-  //   async function  getFilter() {
-  //     const data = axios.get("")
-  //   }
-  //   getFilter()
-  // }, [form])
+
   return (
     <form className="flex flex-col gap-3">
       {variation.variation.map((item_new) => {
@@ -43,6 +44,7 @@ export default function FormProduct({
                   <button
                     onClick={(e) => {
                       e.preventDefault();
+                      router.push(pathname+`?c=${data.product_category.category_name}&${item_new.name}=${item.value}`)
                       setForm({
                         ...form,
                         [item_new.name]: item.value,
@@ -67,17 +69,27 @@ export default function FormProduct({
       <Button
         onClick={(e) => {
           e.preventDefault();
-          // if(form.color && form.size) {
-          //   updateBacket({
-          //     id:Number(new Date()),
-          //     name:data.name,
-          //     price:,
-          //     size:size,
-          //     color:color,
-          //     img:variation
-          //   })
-          // }
-          return null;
+
+          const element = backet.find((item) => {
+            return item.id === data.id;
+          });
+          if (element) {
+            addCount(element);
+            calculatePrice();
+            opneChange();
+            return null;
+          }
+          updateBacket({
+            id: data.id,
+            name: data.name,
+            price: data.product_item[0].price,
+            size: form.size || form.sneakers_size,
+            color: form.color,
+            img: data.product_image,
+            count: 1,
+          });
+          calculatePrice();
+          opneChange();
         }}
         type="submit"
         className=" rounded-xl"

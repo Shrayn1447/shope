@@ -61,6 +61,10 @@ export interface Product {
   descreption: string;
   product_image: string;
   product_item: ProductItem[];
+  product_category: {
+    category_name:string
+  }
+
 }
 
 interface ProductItem {
@@ -74,7 +78,7 @@ export interface ProductCategory {
   descreption: string;
   product_image: string;
   product_item: ProductItem[];
-  Product_category: {
+  product_category: {
     category_name: string;
   };
 }

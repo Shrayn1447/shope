@@ -7,7 +7,7 @@ import Burger from "@/components/Burger";
 export default async function Header() {
   const session = await getServerSession(authOptions);
   return (
-    <header className="sticky top-0 z-[10] flex h-[80px] flex-row-reverse items-center justify-between bg-card">
+    <header className="sticky top-0 z-[10] mb-4 flex h-[80px] flex-row-reverse  items-center justify-between border-b bg-black/90 backdrop-blur-lg">
       <div className=" w-full items-center  px-[50px] md:flex">
         <div className="mr-[10px] hidden flex-1 items-center md:flex md:gap-6 lg:gap-8">
           <Link href={"/"}>

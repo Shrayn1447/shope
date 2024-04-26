@@ -11,21 +11,18 @@ export async function GET(request: NextRequest) {
       where: {
         OR: [
           {
-            value: color,
+            value: color!,
           },
           {
-            value: size,
+            value: size!,
           },
           {
-            AND: {
-              
-            }
-          }
+            AND: {},
+          },
         ],
-   
       },
       include: {
-        Product_configuration: {
+        product_configuration: {
           include: {
             product_item: {},
           },
@@ -33,13 +30,13 @@ export async function GET(request: NextRequest) {
       },
     });
 
-    if (!products) {
+    if (!filter) {
       return NextResponse.json(
         { message: "Данные не найдены" },
         { status: 300 },
       );
     }
-    return NextResponse.json({ data: products }, { status: 200 });
+    return NextResponse.json({ data: filter }, { status: 200 });
   } catch (e) {
     return NextResponse.json(
       { message: "Что то пошлои не так" },

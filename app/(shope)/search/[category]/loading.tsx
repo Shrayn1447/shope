@@ -4,14 +4,14 @@ export default function loading() {
   return (
     <div className="flex h-screen justify-center">
       <svg
-        width="100px"
-        height="100px"
+        width="50px"
+        height="50px"
         viewBox="0 0 16 16"
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         className="animate-spin"
       >
-        <g fill="#000000" clip-rule="evenodd">
+        <g fill="#000000">
           <path
             d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8z"
             opacity=".2"

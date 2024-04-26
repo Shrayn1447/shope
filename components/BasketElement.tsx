@@ -1,9 +1,9 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Backet } from "@/store/backet";
 import { useBacketStore } from "@/store/backet";
 import { motion, AnimatePresence } from "framer-motion";
-
+import { X } from "lucide-react";
 export default function BasketElement({
   item,
   index,
@@ -11,7 +11,7 @@ export default function BasketElement({
   item: Backet;
   index: number;
 }) {
-  const deletBacketElement = useBacketStore((state) => state.deleteBacket);
+  const { calculatePrice, deleteBacket } = useBacketStore((state) => state);
   const [isVisible, setIsVisible] = useState(true);
   return (
     <AnimatePresence>
@@ -30,27 +30,34 @@ export default function BasketElement({
               alt="Привет мир"
             />
           </div>
-          <div className="">
+          <div className=" relative flex flex-col gap-2">
             <span className="text-xl font-medium">{item.name}</span>
-            <div className="flex items-center gap-x-3">
-              <span className="w-fit rounded-2xl bg-blue-500 p-2">
+            <div className="text-md">Количество: {item.count}</div>
+            <div className="flex flex-col justify-center gap-3 gap-x-3">
+              <h1 className="w-fit rounded-2xl bg-blue-500 p-2">
                 {item.price}Р
-              </span>
-              <span className="rounded-2xl border p-2">{item.size}</span>
-              <span
-                className="h-5 w-5 rounded-full border"
-                style={{
-                  backgroundColor: item.color,
-                }}
-              ></span>
+              </h1>
+              <div className="flex gap-2">
+                {item.size && (
+                  <p  className=" rounded-2xl border px-2 py-1">
+                    Размер: {item.size}
+                  </p>
+                )}
+                {item.color && (
+                  <p className="rounded-2xl border px-2 py-1">
+                    Цвет: {item.color}
+                  </p>
+                )}
+              </div>
               <button
                 onClick={() => {
                   setIsVisible(false);
-                  deletBacketElement(index);
+                  deleteBacket(index);
+                  calculatePrice();
                 }}
-                className="m-4 max-w-fit self-end rounded-md bg-red-500 p-1"
+                className="absolute -left-12 -top-7 m-4 max-w-fit self-end rounded-full bg-red-500 p-1 transition-colors hover:bg-red-600"
               >
-                Удалить
+                <X size={15} />
               </button>
             </div>
           </div>

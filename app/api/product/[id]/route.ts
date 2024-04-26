@@ -1,13 +1,14 @@
 import { NextResponse, NextRequest } from "next/server";
 import prisma from "@/lib/prisma";
+import type { category } from "@prisma/client";
 export async function GET(
   request: NextRequest,
   { params }: { params: { id: string } },
 ) {
   try {
     const { searchParams } = new URL(request.nextUrl);
-    const c = searchParams.get("c");
-    const respons = await prisma.product.findUnique({
+    const category = searchParams.get("c") as category;
+    const [respons, variation] = await Promise.all([prisma.product.findUnique({
       where: {
         id: Number(params.id),
       },
@@ -21,11 +22,15 @@ export async function GET(
             },
           },
         },
+        product_category: {
+            select:{
+              category_name:true
+            }
+        }
       },
-    });
-    const variation = await prisma.product_category.findMany({
+    }), prisma.product_category.findMany({
       where: {
-        category_name: c,
+        category_name:category,
       },
       include: {
         variation: {
@@ -38,8 +43,8 @@ export async function GET(
           },
         },
       },
-    });
-
+    })])
+    
     if (!respons) {
       return NextResponse.json(
         { message: "Данные не найдены" },

@@ -2,9 +2,9 @@ import Link from "next/link";
 export default function Footer() {
   return (
     <footer className="mt-[20px] px-[20px]">
-      <div className="mx-auto max-w-[1140px] border-t py-[40px] flex gap-x-8 justify-between">
+      <div className="mx-auto flex max-w-[1140px] justify-between gap-x-8 border-t py-[40px]">
         <div>
-          <ul className="text-[14px] text-white/50 flex flex-col gap-y-[8px]">
+          <ul className="flex flex-col gap-y-[8px] text-[14px] text-white/50">
             <li className="hover:underline">
               <Link href={"/"}>Главная</Link>
             </li>

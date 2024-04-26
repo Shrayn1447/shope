@@ -21,7 +21,7 @@ export async function GET(request: NextRequest) {
       take: 3,
       where: {
         name: {
-          contains: query,
+          contains: query!,
           mode: "insensitive",
         },
       },
