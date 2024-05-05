@@ -7,7 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { filter_data } from "@/lib/filter_data";
+import { filter_data } from "@/lib/filter";
 import { useRouter } from "next/navigation";
 export default function SelectTypeProduct() {
   const router = useRouter();

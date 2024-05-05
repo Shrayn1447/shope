@@ -1,10 +1,13 @@
-import SearchForm from "./Search";
+import SearchForm from "@/components/layout/header/Search";
 import Link from "next/link";
-import UserNavigation from "@/components/Header/UserNavigation";
+import UserNavigation from "@/components/layout/header/UserNavigation";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
-import Burger from "@/components/Burger";
+import { authOptions } from "@/lib/utils/auth";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Menu } from "lucide-react";
+
 export default async function Header() {
+
   const session = await getServerSession(authOptions);
   return (
     <header className="sticky top-0 z-[10] mb-4 flex h-[80px] flex-row-reverse  items-center justify-between border-b bg-black/90 backdrop-blur-lg">
@@ -42,5 +45,37 @@ export default async function Header() {
         <Burger />
       </div>
     </header>
+  );
+}
+
+
+function Burger() {
+  return (
+    <Sheet>
+      <SheetTrigger asChild>
+        <button className="rounded-md border p-2">
+          {" "}
+          <Menu size={25} />
+        </button>
+      </SheetTrigger>
+      <SheetContent>
+        <nav className="mt-[50px] flex h-screen text-[40px]">
+          <ul className="flex w-full flex-col">
+            <li>
+              <Link href={"/"}>Домой</Link>
+            </li>
+            <li>
+              <Link href={"/search/all"}>Все</Link>
+            </li>
+            <li>
+              <Link href={"/search/shirt"}>Футболки</Link>
+            </li>
+            <li>
+              <Link href={"/search/sneakers"}>Крассовки</Link>
+            </li>
+          </ul>
+        </nav>
+      </SheetContent>
+    </Sheet>
   );
 }

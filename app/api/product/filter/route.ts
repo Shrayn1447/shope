@@ -1,5 +1,5 @@
 import { NextResponse, NextRequest } from "next/server";
-import prisma from "@/lib/prisma";
+import prisma from "@/lib/utils/prisma";
 import { Value } from "@radix-ui/react-select";
 export async function GET(request: NextRequest) {
   try {

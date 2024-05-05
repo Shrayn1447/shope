@@ -1,14 +1,15 @@
 import { NextResponse, NextRequest } from "next/server";
-import prisma from "@/lib/prisma";
-import type { category } from "@prisma/client";
-export async function GET(request: NextRequest) {
+import prisma from "@/lib/utils/prisma";
+import { category } from "@prisma/client";
+
+export async function GET(request: NextRequest, 
+  { params }: { params: { category: string } }
+) {
   try {
-    const { searchParams } = new URL(request.url);
-    const type = searchParams.get("type") as category;
     const products = await prisma.product.findMany({
       where: {
         product_category: {
-          category_name: type,
+          category_name: params.category.toUpperCase() as category,
         },
       },
       include: {

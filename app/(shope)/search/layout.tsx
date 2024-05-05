@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-import SelectTypeProduct from "@/components/Filter/SelectTypeProduct";
+import SelectTypeProduct from "@/components/filter/SelectTypeProduct";
 export default function layout({ children }: { children: ReactNode }) {
   return (
     <div className="-z-10 mx-auto flex min-h-screen max-w-[1440px] px-[20px]">

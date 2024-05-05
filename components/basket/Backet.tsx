@@ -10,16 +10,14 @@ import {
   SheetTrigger,
   SheetFooter,
 } from "@/components/ui/sheet";
-import { useBacketStore } from "@/store/backet";
+import { useBacketStore } from "@/store/basket/backet";
 import { ShoppingCart } from "lucide-react";
-import { useStateBacket } from "@/store/backetChange";
 export default function Basket() {
   const backet = useBacketStore((state) => state.backet);
-  const { open, opneChange } = useStateBacket((state) => state);
   return (
-    <Sheet onOpenChange={() => true}>
+    <Sheet >
       <SheetTrigger asChild>
-        <button onClick={opneChange} className="relative rounded-md border p-2">
+        <button className="relative rounded-md border p-2">
           {backet.length !== 0 ? (
             <div className=" absolute -right-2 -top-2 w-[15px] rounded-full bg-red-500 text-[10px]">
               {backet.length}

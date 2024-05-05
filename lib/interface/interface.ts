@@ -66,7 +66,9 @@ export interface Product {
   }
 
 }
-
+export interface Form {
+  [key: string]: string;
+}
 interface ProductItem {
   price: number;
 }

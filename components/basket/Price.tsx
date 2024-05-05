@@ -1,5 +1,5 @@
 "use client";
-import { useBacketStore } from "@/store/backet";
+import { useBacketStore } from "@/store/basket/backet";
 export default function Price() {
   const price = useBacketStore((state) => state.price);
   return (

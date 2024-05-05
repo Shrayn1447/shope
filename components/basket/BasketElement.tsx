@@ -1,7 +1,8 @@
 "use client";
+import { useCallback } from "react";
 import { useState } from "react";
-import { Backet } from "@/store/backet";
-import { useBacketStore } from "@/store/backet";
+import { Backet } from "@/store/basket/backet";
+import { useBacketStore } from "@/store/basket/backet";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 export default function BasketElement({
@@ -13,6 +14,11 @@ export default function BasketElement({
 }) {
   const { calculatePrice, deleteBacket } = useBacketStore((state) => state);
   const [isVisible, setIsVisible] = useState(true);
+  const DeleteItem = useCallback(() => {
+      setIsVisible(false);
+      deleteBacket(index);
+      calculatePrice();
+  }, [index])
   return (
     <AnimatePresence>
       {isVisible && (
@@ -50,11 +56,7 @@ export default function BasketElement({
                 )}
               </div>
               <button
-                onClick={() => {
-                  setIsVisible(false);
-                  deleteBacket(index);
-                  calculatePrice();
-                }}
+                onClick={DeleteItem}
                 className="absolute -left-12 -top-7 m-4 max-w-fit self-end rounded-full bg-red-500 p-1 transition-colors hover:bg-red-600"
               >
                 <X size={15} />

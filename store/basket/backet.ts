@@ -13,7 +13,7 @@ export interface Backet {
 type State = {
   backet: Backet[];
   price: number;
-  updateBacket: (item: Backet) => void;
+  addBacketItem: (item: Backet) => void;
   deleteBacket: (index: number) => void;
   addCount: (item: Backet) => void;
   calculatePrice: () => void;
@@ -28,7 +28,7 @@ export const useBacketStore = create<State>((set) => ({
       newBacket.splice(index, 1);
       return { backet: newBacket };
     }),
-  updateBacket: (item) => set((state) => ({ backet: [...state.backet, item] })),
+    addBacketItem: (item) => set((state) => ({ backet: [...state.backet, item] })),
   addCount: (item) =>
     set((state) => {
       const find = state.backet.findIndex((element) => {

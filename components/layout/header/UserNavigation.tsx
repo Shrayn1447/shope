@@ -2,7 +2,7 @@
 import { signOut } from "next-auth/react";
 import type { Session } from "next-auth";
 import { LogIn, LogOut } from "lucide-react";
-import Basket from "../Backet";
+import Basket from "../../basket/Backet";
 import Link from "next/link";
 export default function UserNavigation({ session }: { session: Session }) {
   return (

@@ -1,9 +1,9 @@
-interface Ifilter_data {
+interface Ifilter {
   text: string;
   category: string;
 }
 
-export const filter_data: Ifilter_data[] = [
+export const filter_data: Ifilter[] = [
   {
     text: "Футболки",
     category: "shirt",

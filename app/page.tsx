@@ -1,8 +1,8 @@
 "use client";
 import axios from "axios";
 import Image from "next/image";
-import Loading from "@/components/Loading/Loading";
-import { ProductCategory } from "@/lib/interface";
+import Loading from "@/components/status/Loading";
+import { ProductCategory } from "@/lib/interface/interface";
 import { Button } from "@/components/ui/button";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
@@ -28,14 +28,12 @@ export default function Home() {
   }
   return (
     <div className="mx-auto grid min-h-screen max-w-[1200px] grid-cols-2 gap-2 md:grid-cols-4">
-      {data?.map((item, index) => {
+      {data?.map((item) => {
         return (
           <div
             key={item.id}
             onClick={() =>
-              router.push(
-                `/product/${item.id}?c=${item.product_category.category_name}`,
-              )
+              router.push(`/product/${item.id}`)
             }
             className="group flex max-w-fit animate-cart-animation cursor-pointer flex-col justify-end gap-3 overflow-hidden rounded-lg border text-center text-[14px] transition-colors  hover:border hover:border-blue-500 md:text-start md:text-[18px]"
           >
