@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import BankCart from '@/components/cart/CartBank'
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 import {
   Form,
   FormControl,
@@ -40,6 +41,7 @@ const formSchema = z.object({
 });
 
 export default function Page() {
+  const router = useRouter()
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -50,7 +52,7 @@ export default function Page() {
     },
   });
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+    router.push('/pay')
   }
 
   return (
