@@ -2,7 +2,7 @@ import { NextResponse, NextRequest } from "next/server";
 import prisma from "@/lib/utils/prisma";
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string, category:string } },
+  { params }: { params: { id: string; category: string } },
 ) {
   try {
     const product = await prisma.product.findUnique({
@@ -20,15 +20,15 @@ export async function GET(
           },
         },
         product_category: {
-            select:{
-              category_name:true
-            }
-        }
+          select: {
+            category_name: true,
+          },
+        },
       },
-    })
+    });
     const variation = await prisma.product_category.findMany({
       where: {
-        category_name:product?.product_category?.category_name,
+        category_name: product?.product_category?.category_name,
       },
       include: {
         variation: {
@@ -41,7 +41,7 @@ export async function GET(
           },
         },
       },
-    })
+    });
     if (!product) {
       return NextResponse.json(
         { message: "Данные не найдены" },

@@ -1,9 +1,15 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { ProductCategory } from "@/lib/interface/interface";
+import { IProductCategory } from "@/lib/interface/interface";
 import { Button } from "../ui/button";
 import Image from "next/image";
-export default function ProductCart({ data, category }: { data: ProductCategory, category:string}) {
+export default function ProductCart({
+  data,
+  category,
+}: {
+  data: IProductCategory;
+  category: string;
+}) {
   const router = useRouter();
   return (
     <div

@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import Loading from "../../status/Loading";
+import { Loading } from "@/components/index";
 import debounce from "debounce";
 interface Name {
   id: number;

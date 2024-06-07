@@ -1,24 +1,22 @@
 "use client";
-import { useCallback } from "react";
-import { useState } from "react";
-import { Backet } from "@/store/basket/backet";
-import { useBacketStore } from "@/store/basket/backet";
+import { useCallback, useState } from "react";
+import { IBacket, useBacketStore } from "@/store/basket/backet";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
-export default function BasketElement({
+export default function BasketItem({
   item,
-  index,
+  id,
 }: {
-  item: Backet;
-  index: number;
+  item: IBacket;
+  id: number;
 }) {
   const { calculatePrice, deleteBacket } = useBacketStore((state) => state);
   const [isVisible, setIsVisible] = useState(true);
-  const DeleteItem = useCallback(() => {
-      setIsVisible(false);
-      deleteBacket(index);
-      calculatePrice();
-  }, [index])
+  const DeleteItem = () => {
+    setIsVisible(false);
+    deleteBacket(id);
+    calculatePrice();
+  };
   return (
     <AnimatePresence>
       {isVisible && (
@@ -44,8 +42,8 @@ export default function BasketElement({
                 {item.price}Р
               </h1>
               <div className="flex gap-2">
-                {item.size && (
-                  <p  className=" rounded-2xl border px-2 py-1">
+                {/* {item.size && (
+                  <p className=" rounded-2xl border px-2 py-1">
                     Размер: {item.size}
                   </p>
                 )}
@@ -53,7 +51,7 @@ export default function BasketElement({
                   <p className="rounded-2xl border px-2 py-1">
                     Цвет: {item.color}
                   </p>
-                )}
+                )} */}
               </div>
               <button
                 onClick={DeleteItem}

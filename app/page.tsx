@@ -2,22 +2,23 @@
 import axios from "axios";
 import Image from "next/image";
 import Loading from "@/components/status/Loading";
-import { ProductCategory } from "@/lib/interface/interface";
+import { IProductCategory } from "@/lib/interface/interface";
 import { Button } from "@/components/ui/button";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
+import { ProductCart } from "@/components";
 export default function Home() {
   const router = useRouter();
   const { data, isLoading, error } = useQuery({
     queryKey: ["query"],
     queryFn: async () => {
       const response = await axios.get("http://localhost:3000/api/home");
-      const { data }: { data: ProductCategory[] } = response.data;
+      const { data }: { data: IProductCategory[] } = response.data;
       return data;
     },
   });
   if (error) {
-    return <div>Error</div>
+    return <div>Error</div>;
   }
   if (isLoading) {
     return (
@@ -32,9 +33,7 @@ export default function Home() {
         return (
           <div
             key={item.id}
-            onClick={() =>
-              router.push(`/product/${item.id}`)
-            }
+            onClick={() => router.push(`/product/${item.id}`)}
             className="group flex max-w-fit animate-cart-animation cursor-pointer flex-col justify-end gap-3 overflow-hidden rounded-lg border text-center text-[14px] transition-colors  hover:border hover:border-blue-500 md:text-start md:text-[18px]"
           >
             <div className="relative flex justify-center">

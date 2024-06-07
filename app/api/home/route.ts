@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/utils/prisma";
-export async function GET(_:NextRequest, ) {
+export async function GET(_: NextRequest) {
   try {
     const products = await prisma.product.findMany({
       include: {
@@ -18,11 +18,10 @@ export async function GET(_:NextRequest, ) {
         { status: 300 },
       );
     }
-    console.log(products)
-    return NextResponse.json({ data: products }, { status: 200 });
+    return NextResponse.json({data: products}, {status: 200});
   } catch (e) {
     return NextResponse.json(
-      { message: "Что то пошлои не так" },
+      { message: "Сервер не отвечает" },
       { status: 501 },
     );
   }

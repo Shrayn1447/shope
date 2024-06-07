@@ -198,6 +198,10 @@ svg *[stroke] {
   stroke: currentColor;
 }
 
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px white inset;
+  -webkit-text-fill-color: black !important;
+}
 /**
    Чиним баг задержки смены цвета при взаимодействии с svg-элементами
   */

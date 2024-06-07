@@ -1,6 +1,8 @@
 "use client";
 import Price from "./Price";
-import BasketElement from "./BasketElement";
+import BasketElement from "./BasketItem";
+import { Button } from "../ui/button";
+import { useRouter } from "next/navigation";
 import {
   Sheet,
   SheetContent,
@@ -13,9 +15,10 @@ import {
 import { useBacketStore } from "@/store/basket/backet";
 import { ShoppingCart } from "lucide-react";
 export default function Basket() {
-  const backet = useBacketStore((state) => state.backet);
+  const {backet, changeBacket, open } = useBacketStore((state) => state);
+  const { push } = useRouter()
   return (
-    <Sheet >
+    <Sheet open={open} onOpenChange={changeBacket}>
       <SheetTrigger asChild>
         <button className="relative rounded-md border p-2">
           {backet.length !== 0 ? (
@@ -34,7 +37,7 @@ export default function Basket() {
               {backet.length !== 0 ? (
                 backet.map((item, index) => {
                   return (
-                    <BasketElement key={item.id} item={item} index={index} />
+                    <BasketElement key={item.id} item={item} id={item.id} />
                   );
                 })
               ) : (
@@ -43,7 +46,11 @@ export default function Basket() {
             </ul>
           </SheetDescription>
         </SheetHeader>
-        <SheetFooter>
+        <SheetFooter className="flex">
+          <Button onClick={() => {
+            push('/buy')
+            changeBacket()
+          }}>Купить</Button>
           <Price />
         </SheetFooter>
       </SheetContent>

@@ -1,60 +1,50 @@
-export interface Color {
+export interface IParametrsColor {
   id: number;
   color: string;
 }
 
-export interface Size {
+export interface ISize {
   id: number;
   size: string;
 }
-export interface Img {
+export interface IImg {
   id: number;
   url: string;
 }
-interface ProductItem {
-  product_img: string;
-  price: number;
-}
 
-interface VariationOption {
+export interface IVariationOption {
   value: string;
 }
 
-interface VariationProduct {
+export interface IVariationProduct {
   id: number;
   name: string;
   product_categoryId: number;
-  variation_option: VariationOption[];
+  variation_option: IVariationOption[];
 }
 
-export interface Variation {
+export interface IVariation {
   id: number;
   category_name: string;
-  variation: VariationProduct[];
+  variation: IVariationProduct[];
 }
 
-interface VariationOption {
-  id: number;
-  value: string;
-  variationId: number;
-}
-
-interface ProductConfiguration {
+interface IProductConfiguration {
   product_id: number;
   variation_id: number;
-  variation_option: VariationOption;
+  variation_option: IVariationOption;
 }
 
-interface ProductItem {
+interface IProductItem {
   id: number;
   quantity: number;
   product_img: string;
   price: number;
   productId: number;
-  product_configuration: ProductConfiguration[];
+  product_configuration: IProductConfiguration[];
 }
 
-export interface Product {
+export interface IProduct {
   id: number;
   product_categoryId: number;
   name: string;
@@ -62,18 +52,17 @@ export interface Product {
   product_image: string;
   product_item: ProductItem[];
   product_category: {
-    category_name:string
-  }
-
+    category_name: string;
+  };
 }
-export interface Form {
+export interface IParams {
   [key: string]: string;
 }
 interface ProductItem {
   price: number;
 }
 
-export interface ProductCategory {
+export interface IProductCategory {
   id: number;
   product_categoryId: number;
   name: string;

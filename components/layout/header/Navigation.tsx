@@ -2,9 +2,9 @@
 import { signOut } from "next-auth/react";
 import type { Session } from "next-auth";
 import { LogIn, LogOut } from "lucide-react";
-import Basket from "../../basket/Backet";
+import Basket from "../../basket/Basket";
 import Link from "next/link";
-export default function UserNavigation({ session }: { session: Session }) {
+export default function Navigation({ session }: { session: Session }) {
   return (
     <div className="flex flex-1 justify-end gap-4 md:w-1/3  md:justify-end md:px-[20px]">
       {session ? (
