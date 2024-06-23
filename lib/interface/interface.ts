@@ -50,7 +50,7 @@ export interface IProduct {
   name: string;
   descreption: string;
   product_image: string;
-  product_item: ProductItem[];
+  product_item: IProductItem[];
   product_category: {
     category_name: string;
   };

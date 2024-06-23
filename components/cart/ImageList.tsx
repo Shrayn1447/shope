@@ -1,18 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useState} from "react";
 import clsx from "clsx";
-import { Product } from "@/lib/interface/interface";
-interface ProductItem {
-  id: number;
-  quantity: number;
-  product_img: string;
-  price: number;
-  productId: number;
-}
-export default function ImageList({ data }: { data: Product }) {
+import {  IProduct } from "@/lib/interface/interface";
+
+export default function ImageList({ data }: { data:  IProduct }) {
   const [currentImg, setCurrentImg] = useState<string>(data.product_image);
   return (
     <div className="flex h-full w-full basis-full flex-col items-center justify-center gap-3">

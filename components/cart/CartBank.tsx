@@ -5,7 +5,7 @@ import React, { useState } from 'react'
 export default function CartBank() {
   const [cardNumber, setCardNumber] = useState('');
 
-  const handleCardNumberChange = (e) => {
+  const handleCardNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let value = e.target.value.replace(/\s+/g, ''); 
     if (value.length > 16) {
       value = value.slice(0, 16);
